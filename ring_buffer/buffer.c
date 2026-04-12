@@ -8,12 +8,14 @@ void ring_init(rb_buf_t *rb)
 
 bool ring_push(rb_buf_t *rb, uint32_t n)
 {
-    if (rb->head == rb->tail - 1)
+    // does moving the head forward land on the tail
+    if (((rb->head + 1) % RING_CAPACITY) == rb->tail)
     {
         return false;
     }
-    rb->head = rb->head + 1 % RING_CAPACITY;
+    // write then advance
     rb->data[rb->head] = n;
+    rb->head = (rb->head + 1) % RING_CAPACITY;
     return true;
 }
 
@@ -24,6 +26,6 @@ uint32_t ring_pop(rb_buf_t *rb)
         return 0;
     }
     uint32_t result = rb->data[rb->tail];
-    rb->tail = rb->tail + 1 % RING_CAPACITY;
+    rb->tail = (rb->tail + 1) % RING_CAPACITY;
     return result;
 }

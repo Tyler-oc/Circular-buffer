@@ -1,7 +1,7 @@
 #pragma once
 #include <stdint.h>
 #include <stdbool.h>
-#define RING_CAPACITY 8;
+#define RING_CAPACITY 8
 
 typedef struct
 {
