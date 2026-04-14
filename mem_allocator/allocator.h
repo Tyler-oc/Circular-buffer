@@ -7,10 +7,10 @@
 typedef struct
 {
     uint32_t size;
-    bool used;
+    bool free;
 } header;
 
-void heap_init();
+void heap_init(header *head);
 
 void *my_malloc(size_t n);
 
