@@ -20,6 +20,7 @@ void *my_malloc(size_t n)
         if (curr->free && curr->size >= n)
         {
             curr->free = false;
+            curr->size = n;
             return (uint8_t *)curr + sizeof(header);
         }
         size_t next_pos = pos + curr->size + sizeof(header);
@@ -41,6 +42,7 @@ void heap_dump(void)
     size_t pos = 0;
     while (pos < HEAP_SIZE)
     {
+
         printf("Heap position: %d, Size: %d, free: %d \n", pos, curr->size, curr->free);
         size_t next_pos = pos + curr->size + sizeof(header);
         curr = (header *)(heap + next_pos);
